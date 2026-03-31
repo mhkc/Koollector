@@ -1,0 +1,14 @@
+[project]
+name = "koollector"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "click>=8.3.1",
+    "docling>=2.82.0",
+    "pypaperless>=5.2.2",
+]
+
+[project.scripts]
+koollector = "koollector.main:main"
