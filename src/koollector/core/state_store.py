@@ -1,14 +1,13 @@
 """State management for the application."""
 
+import json
+import logging
+import os
+import tempfile
 from datetime import datetime
 from datetime.timezone import timezone
-import logging
-import json
-import os
 from pathlib import Path
-import tempfile
 from typing import Any
-
 
 LOG = logging.getLogger(__name__)
 
@@ -20,7 +19,6 @@ def _now_iso() -> str:
 
 class DocumentState:
     """Simple JSON file store for processed documents."""
-
 
     def __init__(self, root: Path | str, name: str = "state.json"):
         self.root = Path(root)
@@ -37,7 +35,7 @@ class DocumentState:
     def path(self) -> Path:
         """Get the path to the state file."""
         return self.root / self.name
-    
+
     def load(self) -> dict[str, Any] | None:
         """Load state from JSON file; return None if not found."""
 
@@ -69,7 +67,7 @@ class DocumentState:
         self._state[doc_id] = {"processed_at": _now_iso()}
         self.updated_at = _now_iso()
         self.save()
-    
+
     def is_processed(self, doc_id: str) -> bool:
         """Check if a document has been processed."""
         return doc_id in self._state
