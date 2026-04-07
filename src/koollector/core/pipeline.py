@@ -27,7 +27,7 @@ def process_documents():
 
 
 def convert_document(
-    source: str, *, output_format: OutputFormat, profile: Preset, output_dir_override: Path
+    source: str, *, output_format: OutputFormat, preset: Preset, output_dir_override: Path
 ) -> str:
     """Convert document to markdown format."""
     # convert document
@@ -37,6 +37,6 @@ def convert_document(
         LOG.error("Failed to convert document: %s", exc)
 
     output_path = make_output_path(
-        profile, dir_override=output_dir_override, source=source
+        preset, dir_override=output_dir_override, source=source
     )
     write_output(output_path, result)

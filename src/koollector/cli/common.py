@@ -4,8 +4,9 @@ import logging
 import sys
 
 import click
+from click import UsageError
 
-from koollector.core.settings import Settings
+from koollector.core.settings import Settings, BUILTIN_PRESETS
 
 
 def load_settings(yaml_file: str | None = None) -> Settings:
@@ -42,3 +43,16 @@ def setup_logging(verbose: bool = False) -> None:
 
     root.setLevel(level)
     root.addHandler(handler)
+
+
+def resolve_conversion_config(preset_name, fmt, settings: Settings):
+    if preset_name and fmt:
+        raise UsageError("Use either --preset or --format, not both")
+
+    if preset_name:
+        return settings.profiles.get(preset_name)
+
+    if fmt:
+        return BUILTIN_PRESETS.get(fmt)
+
+    raise UsageError("You must specify --preset or --format")

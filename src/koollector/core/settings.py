@@ -88,3 +88,22 @@ class Settings(BaseSettings):
     paperless_api_token: str | None = None
 
     presets: dict[str, Preset] = Field(default_factory=dict)
+
+
+BUILTIN_PRESETS = {
+    "markdown": Preset(
+        source=FileSystemSource(...),
+        convert=ConvertConfig(output_format="markdown"),
+        output=OutputConfig(...)
+    ),
+    "text": Preset(
+        source=FileSystemSource(...),
+        convert=ConvertConfig(output_format="text"),
+        output=OutputConfig(...)
+    ),
+    "html": Preset(
+        source=FileSystemSource(...),
+        convert=ConvertConfig(output_format="html"),
+        output=OutputConfig(...)
+    ),
+}
