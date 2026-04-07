@@ -12,4 +12,8 @@ dependencies = [
 ]
 
 [project.scripts]
-koollector = "koollector.main:main"
+koollector = "koollector.cli.main:cli"
+
+[tool.uv]
+
+package = true
