@@ -24,7 +24,7 @@ LOG = logging.getLogger(__name__)
     "-f",
     "--format",
     "output_format",
-    type=click.Choice(OutputFormat),
+    type=click.Choice(OutputFormat, case_sensitive=False),
     help="Output format for the converted documents.",
 )
 @click.option(
